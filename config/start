@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd ${APP_HOME}
+chown -R znc ${APP_HOME}
+sudo -u znc /usr/bin/znc --datadir ${APP_HOME} --makepem
+sudo -u znc /usr/bin/znc --datadir ${APP_HOME} --no-color --foreground -D

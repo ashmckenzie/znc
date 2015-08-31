@@ -1,0 +1,31 @@
+---
+#docker:
+#  host: unix:///var/run/docker.sock
+
+secrets_file: ./.secrets.yml
+
+userdata:
+  app:
+    home: /app
+  znc:
+    irc_server:
+      host: chat.freenode.net
+      port: +6697
+    port: 6668
+    ssl_cert: /app/znc.pem
+
+project:
+  name: znc
+  description: ZNC IRC bouncer
+
+stacks:
+- name: znc
+  description: ZNC IRC bouncer
+  units:
+    - name: app
+      version: 1.0.0
+      dockerfile: Dockerfile
+      ports:
+        - "{{ userdata.znc.port }}:{{ userdata.znc.port }}"
+      volumes:
+        - /data/znc:/app/users
